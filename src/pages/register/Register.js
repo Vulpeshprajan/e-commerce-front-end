@@ -1,5 +1,5 @@
 import React ,{useState} from 'react'
-import { Form, Card, InputGroup, FormControl, Button, Alert, Spinner } from "react-bootstrap";
+import { Form, Card, InputGroup, Button, Alert, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 import {userRegister} from "./userAction";
@@ -103,7 +103,7 @@ const {name, value} = e.target
   </Form.Group>
   <Form.Group className="mb-3">
     <Form.Label>Address</Form.Label>
-    <Form.Control name = "address"onChange={handleOnChange} onChange= {handleOnChange} placeholder=" i.e. 50 george street , NSW Sydney,2000 " />
+    <Form.Control name = "address" onChange= {handleOnChange} placeholder=" i.e. 50 george street , NSW Sydney,2000 " />
   </Form.Group>
                     <Form.Group className="mb-3">
                     <Form.Label>Gender</Form.Label>

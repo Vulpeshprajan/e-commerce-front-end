@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Alert, Spinner } from 'react-bootstrap';
 import { userEmailVerification } from "../register/userAction";
 
-export const EmailVerification = () => {
+ const EmailVerification = () => {
 
     const dispatch = useDispatch()
     
@@ -12,7 +12,7 @@ export const EmailVerification = () => {
 
     const pin = params.get("pin")
     const email = params.get("email")
-    console.log(pin, email);
+
 
     const {isPending, userRegisterResponse} = useSelector(state => state.user)
 
@@ -20,7 +20,7 @@ export const EmailVerification = () => {
     //   send pin and email to api server 
         
     dispatch(userEmailVerification({pin, email}))
-    }, [])
+    }, [dispatch, pin, email])
 
     return (
         <div className ="m-auto mt-5 py-5" style ={{width: "500px" }}>
@@ -33,3 +33,5 @@ export const EmailVerification = () => {
         </div>
     )
 }
+
+export default EmailVerification

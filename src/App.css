@@ -1,5 +1,7 @@
 /* ===================== registration page ========= */
-
+a {
+  text-decoration: none;
+}
 .register-page {
 }
 
