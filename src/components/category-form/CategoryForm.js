@@ -1,15 +1,19 @@
 import React, {useState} from 'react'
-import { Col, Form, Row, Button } from 'react-bootstrap'
+import {useDispatch, useSelector  } from "react-redux";
+import { Col, Form, Row, Button, Spinner, Alert } from 'react-bootstrap'
+import { createCat } from "../../pages/category/categoryAction";
 
 const initialState = {
     name: "",
-    parentCat: ""
+    parentCat: null,
 }
 
 const CategoryForm = () => {
-
-
+ const dispatch = useDispatch();
     const [newCat, setNewCat] = useState(initialState)
+
+  const {isLoading, categoryResponse, categories} = useSelector(state => state.category)
+
      
     const handleOnChange = e => {
         const { name, value } = e.target
@@ -22,13 +26,27 @@ const CategoryForm = () => {
 
     const handleOnSubmit = e => {
         e.preventDefault();
-        console.log(newCat);
 
+        if(!newCat.name){
+        return alert("Please enter the category name")
+        }
+        dispatch(createCat(newCat));
+       
     } 
 
-    
+    const parentCat = categories.filter(row => !row.parentCat)
     return (
         <div>
+          {
+          isLoading && <Spinner variant = "primary" animation= "border" /> 
+          }
+
+        {
+          categoryResponse?.message && (
+          <Alert variant = {categoryResponse?.status === "success" ? "success": "danger"} > 
+          {categoryResponse?.message} </Alert> )
+          }
+          
        <Form onSubmit = {handleOnSubmit}>
   <Row>
     <Col>
@@ -36,17 +54,18 @@ const CategoryForm = () => {
     </Col>
     <Col>
     <Form.Select name="parentCat" onChange= {handleOnChange}aria-label="Default select example">
-  <option value=""> Select Parent Category</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
+    <option value=""> Select Parent Category</option>
+    {parentCat?.length && parentCat.map((row,i ) => <option key={row._id} value= {row._id}> {row.name}</option>)}
+
+
+
 </Form.Select>
     </Col>
     <Col>
      <Button type= "submit"> Add Category</Button>
     </Col>
   </Row>
-</Form>
+</Form> 
         </div>
     )
 }

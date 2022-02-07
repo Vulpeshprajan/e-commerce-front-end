@@ -1,6 +1,7 @@
 import React from 'react'
 import BreadcrumbComp from '../../components/breadcrumb/Breadcrumb';
 import CategoryForm from '../../components/category-form/CategoryForm';
+import { CategoryList } from '../../components/category-list/CategoryList';
 import AdminLayout from "../layout/AdminLayout";
 
 const Category = () => {
@@ -14,8 +15,12 @@ const Category = () => {
                    <CategoryForm />
                     </div>
 
+                    <hr/>
 
-                    <div className="cat-list">
+                    <div className="cat-list mt-5">
+                    <h2> Category Lists </h2>
+        <CategoryList/>
+
                     </div>
                 </div>
             </AdminLayout>
